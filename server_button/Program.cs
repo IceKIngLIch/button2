@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using System.IO;
 
 namespace test_button
 {
@@ -188,8 +189,13 @@ namespace test_button
             SqliteConnection connection; // бд
 
             /*
-            //SqliteCommand command; //класс для выполнения запросов */           
-            using ( connection = new SqliteConnection("Data Source=usersdata.db"))//  подключениек  бд в папке с проектом, при попытки открытия бд при ее отсутствии гененрит новую
+            //SqliteCommand command; //класс для выполнения запросов */  
+            string path= Environment.CurrentDirectory.ToString();
+            path=Directory.GetParent(path).ToString();
+            path = Directory.GetParent(path).ToString();
+            path = Directory.GetParent(path).ToString()+ "\\usersdata.db";// путь до бд
+            
+            using ( connection = new SqliteConnection($"Data Source={path}"))//  подключениек  бд в папке с проектом, при попытки открытия бд при ее отсутствии гененрит новую
             {
                 /*connection.Open();                 
                 //ComandText хранит команду 
